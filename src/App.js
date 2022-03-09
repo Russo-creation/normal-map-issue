@@ -1,25 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import { Suspense } from 'react';
+import { OrbitControls } from '@react-three/drei';
+import { Canvas } from '@react-three/fiber';
+import Model from './object';
+import * as THREE from 'three';
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Canvas camera={{ fov: 45, position: [-4, 2, -4] }}>
+      <color attach="background" args={['#eb7200']} />
+      <directionalLight intensity={1.8} color={new THREE.Color('#eb7200')} />
+
+      <Suspense fallback={null}>
+        <Model />
+      </Suspense>
+      <OrbitControls />
+    </Canvas>
   );
 }
-
-export default App;
